@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react';
 import {Text as RNText, TextProps, TextStyle} from 'react-native';
 import fontSize from "@/assets/fontSize";
+import textUtils from "@/components/Text/textUtils";
 
 interface IProps extends TextProps {
   title?: boolean;
@@ -8,8 +9,9 @@ interface IProps extends TextProps {
 
 function Text({style, title, ...props}: IProps) {
 
+
   const font: TextStyle = useMemo(() => {
-    const weight = (style as any)?.fontWeight;
+    const weight = textUtils.extractWeight(style);
     if (title) {
       switch (weight) {
         case "500":
@@ -44,7 +46,7 @@ function Text({style, title, ...props}: IProps) {
           };
       }
     }
-  }, [(style as any)?.fontWeight, title])
+  }, [style, title])
 
   return (
     <RNText style={[{fontSize: fontSize.normal}, style, font]} {...props}/>
