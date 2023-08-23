@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import {Text as RNText, TextProps, TextStyle} from 'react-native';
+import fontSize from "@/assets/fontSize";
 
 interface IProps extends TextProps {
   title?: boolean;
@@ -46,7 +47,7 @@ function Text({style, title, ...props}: IProps) {
   }, [(style as any).fontWeight, title])
 
   return (
-    <RNText style={[style, font]} {...props}/>
+    <RNText style={[{fontSize: fontSize.normal}, style, font]} {...props}/>
   );
 }
 

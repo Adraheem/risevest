@@ -1,10 +1,10 @@
 import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, View} from 'react-native';
 import {useFonts} from "expo-font";
-import fonts from "./assets/fonts";
+import fonts from "./src/assets/fonts";
 import * as SplashScreen from "expo-splash-screen";
 import {useCallback} from "react";
-import Text from "./components/Text";
+import Text from "@/components/Text";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "800",
-    fontSize: 24,
+    // fontSize: 24,
   }
 });
