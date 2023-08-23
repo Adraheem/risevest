@@ -9,7 +9,7 @@ interface IProps extends TextProps {
 function Text({style, title, ...props}: IProps) {
 
   const font: TextStyle = useMemo(() => {
-    const weight = (style as any).fontWeight;
+    const weight = (style as any)?.fontWeight;
     if (title) {
       switch (weight) {
         case "500":
@@ -44,7 +44,7 @@ function Text({style, title, ...props}: IProps) {
           };
       }
     }
-  }, [(style as any).fontWeight, title])
+  }, [(style as any)?.fontWeight, title])
 
   return (
     <RNText style={[{fontSize: fontSize.normal}, style, font]} {...props}/>

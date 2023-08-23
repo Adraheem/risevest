@@ -1,10 +1,11 @@
 import {StatusBar} from 'expo-status-bar';
 import {StyleSheet, View} from 'react-native';
 import {useFonts} from "expo-font";
-import fonts from "./src/assets/fonts";
 import * as SplashScreen from "expo-splash-screen";
 import {useCallback} from "react";
 import Text from "@/components/Text";
+import fonts from "@/assets/fonts";
+import {Link} from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,6 +25,7 @@ export default function App() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <Text style={styles.text}>Open up App.tsx to start working on your app!</Text>
+      <Link href="/onboard">Go to onboard</Link>
       <StatusBar style="auto"/>
     </View>
   );
