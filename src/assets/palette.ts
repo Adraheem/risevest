@@ -9,6 +9,7 @@ const palette = {
   orange: "#FE7122",
   indigo: "#B80074",
   red: "#F04438",
+  green: "#27BF41",
 }
 
 export default palette;

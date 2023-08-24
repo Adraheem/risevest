@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Keyboard,
+  Keyboard, KeyboardAvoidingView, Platform,
   ScrollView,
   ScrollViewProps,
   StyleSheet,
@@ -11,25 +11,30 @@ import palette from "@/assets/palette";
 interface IProps extends ScrollViewProps {
 }
 
-function Screen({children, ...props}: IProps) {
+function Screen({children, contentContainerStyle, style, ...props}: IProps) {
   return (
     <ScrollView
-      style={{backgroundColor: palette.white}}
       keyboardDismissMode="interactive"
-      keyboardShouldPersistTaps="always"
-      contentContainerStyle={styles.container}
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={[styles.container, contentContainerStyle]}
+      style={[{backgroundColor: palette.white}, style]}
       {...props}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{flex: 1}}>
-        {children}
-      </TouchableWithoutFeedback>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "android" ? "height" : "padding"}
+        style={{flex: 1}}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{flex: 1}}>
+          {children}
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    minHeight: "100%",
     backgroundColor: palette.white,
   }
 });

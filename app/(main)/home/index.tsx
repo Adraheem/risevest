@@ -1,26 +1,61 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import Text from "@/components/Text";
-import palette from "@/assets/palette";
+import {Dimensions, SafeAreaView, StyleSheet, View} from 'react-native';
 import Screen from "@/components/Screen";
+import {Image} from "expo-image";
+import palette from "@/assets/palette";
+import Greetings from "@/screenComponents/home/Greetings";
+import Text from "@/components/Text";
+import {Feather, MaterialCommunityIcons} from "@expo/vector-icons";
+import fontSize from "@/assets/fontSize";
+import Balance from "@/screenComponents/home/Balance";
+import Plans from "@/screenComponents/home/Plans";
+import NeedHelp from "@/screenComponents/home/NeedHelp";
+import TodayQuote from "@/screenComponents/home/TodayQuote";
+import RiseIcon from "@/assets/images/RiseIcon";
 
 interface IProps {
 }
 
 function HomeScreen(props: IProps) {
   return (
-    <Screen>
-      <View style={styles.container}>
-        <Text>Home</Text>
-      </View>
-    </Screen>
+    <View style={{flex: 1, backgroundColor: palette.white}}>
+      <Image style={styles.bg} source={require("@/assets/images/bg-grad.png")}/>
+      <Screen
+        style={{zIndex: 2, backgroundColor: "transparent"}}
+        contentContainerStyle={{backgroundColor: "transparent"}}
+        showsVerticalScrollIndicator={false}
+      >
+        <SafeAreaView>
+          <View style={styles.container}>
+            <Greetings/>
+            <Balance/>
+            <Plans/>
+            <NeedHelp/>
+            <TodayQuote/>
+            <View style={styles.rise}>
+              <RiseIcon/>
+            </View>
+          </View>
+        </SafeAreaView>
+      </Screen>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 1000,
-    backgroundColor: palette.orange,
+    padding: 16,
+  },
+  bg: {
+    width: Dimensions.get("screen").width,
+    height: Dimensions.get("screen").width,
+    position: "absolute",
+    zIndex: 1,
+  },
+  rise: {
+    marginVertical: 30,
+    alignItems: "center",
+    justifyContent: "center",
   }
 });
 

@@ -11,14 +11,16 @@ import Text from "@/components/Text";
 import palette from "@/assets/palette";
 
 interface IProps extends TouchableOpacityProps {
-  text: string;
+  text: React.ReactNode;
   size?: "SMALL" | "DEFAULT",
-  variant?: "PRIMARY" | "PRIMARY-ALT",
+  variant?: "PRIMARY" | "PRIMARY-ALT" | "PRIMARY-OUTLINE",
   textProps?: TextProps,
   loading?: boolean,
+  iconBefore?: React.ReactNode,
+  iconAfter?: React.ReactNode,
 }
 
-const Button = React.forwardRef((allProps: IProps, ref) => {
+const Button = React.forwardRef((allProps: IProps, ref: any) => {
   const {
     children,
     text,
@@ -28,6 +30,8 @@ const Button = React.forwardRef((allProps: IProps, ref) => {
     textProps,
     loading,
     disabled,
+    iconBefore,
+    iconAfter,
     ...props
   } = allProps;
 
@@ -57,6 +61,18 @@ const Button = React.forwardRef((allProps: IProps, ref) => {
           }
         }
 
+      case "PRIMARY-OUTLINE":
+        return {
+          view: {
+            backgroundColor: palette.white,
+            borderWidth: 1,
+            borderColor: palette.offWhite,
+          },
+          text: {
+            color: palette.brand
+          }
+        }
+
       default:
         return {
           view: {
@@ -74,8 +90,10 @@ const Button = React.forwardRef((allProps: IProps, ref) => {
       activeOpacity={0.8}
       style={[styles.button, sizeStyle, variantStyle.view, {opacity: loading || disabled ? 0.3 : 1}, style]}
       disabled={loading || disabled}
+      ref={ref}
       {...props}
     >
+      {iconBefore}
       {text ? (
         <Text
           {...textProps}
@@ -84,6 +102,7 @@ const Button = React.forwardRef((allProps: IProps, ref) => {
           {text}
         </Text>
       ) : children}
+      {iconAfter}
     </TouchableOpacity>
   );
 });
@@ -93,6 +112,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
+    gap: 5,
+    paddingHorizontal: 20,
   },
   text: {
     textAlign: "center",
