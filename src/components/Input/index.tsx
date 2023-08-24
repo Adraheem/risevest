@@ -29,13 +29,12 @@ function Input({placeholder, onFocus, onBlur, secureTextEntry, value, error, ...
   }));
 
   const focusStyle: { view: ViewStyle, placeholder: TextStyle } = useMemo(() => {
-    console.log(value)
     if (focused || !isEmpty(value)) {
       placeholderTranslate.value = withTiming(-30);
 
       return {
         view: {
-          borderColor: error ? palette.red : palette.brand,
+          borderColor: error ? palette.red : focused ? palette.brand : palette.offWhite,
         },
         placeholder: {
           fontSize: fontSize.small,

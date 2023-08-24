@@ -5,10 +5,11 @@ import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
-import {Formik} from "formik";
+import {Formik, FormikHelpers} from "formik";
 import * as yup from "yup";
 import {MaterialIcons} from "@expo/vector-icons";
 import Screen from "@/components/Screen";
+import {useRouter} from "expo-router";
 
 interface IProps {
 }
@@ -20,14 +21,17 @@ function SignupScreen(props: IProps) {
       return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/.test(value ?? "");
     })
       .required("Required *"),
-  })
+  });
+
+  const router = useRouter();
 
   const initialValue = {
     email: "",
     password: "",
   }
 
-  const onSubmit = () => {
+  const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
+    router.push("/signup/more");
   }
 
   return (
@@ -47,7 +51,16 @@ function SignupScreen(props: IProps) {
             validationSchema={validationSchema}
             enableReinitialize
           >
-            {({handleChange, handleBlur, values, isValid, errors, touched, isSubmitting}) => (
+            {({
+                handleChange,
+                handleBlur,
+                values,
+                isValid,
+                errors,
+                touched,
+                handleSubmit,
+                isSubmitting
+              }) => (
               <View style={{gap: 20, marginTop: 40}}>
                 <Input
                   placeholder="Email address"
@@ -67,7 +80,12 @@ function SignupScreen(props: IProps) {
 
                 <PasswordValidation password={values.password}/>
 
-                <Button text="Sign Up" disabled={!isValid} loading={isSubmitting}/>
+                <Button
+                  text="Sign Up"
+                  onPress={() => handleSubmit()}
+                  disabled={!isValid}
+                  loading={isSubmitting}
+                />
               </View>
             )}
           </Formik>

@@ -18,17 +18,19 @@ interface IProps extends TouchableOpacityProps {
   loading?: boolean,
 }
 
-function Button({
-                  children,
-                  text,
-                  style,
-                  size,
-                  variant,
-                  textProps,
-                  loading,
-                  disabled,
-                  ...props
-                }: IProps) {
+const Button = React.forwardRef((allProps: IProps, ref) => {
+  const {
+    children,
+    text,
+    style,
+    size,
+    variant,
+    textProps,
+    loading,
+    disabled,
+    ...props
+  } = allProps;
+
   const sizeStyle: ViewStyle = useMemo(() => {
     switch (size) {
       case "SMALL":
@@ -84,7 +86,7 @@ function Button({
       ) : children}
     </TouchableOpacity>
   );
-}
+});
 
 const styles = StyleSheet.create({
   button: {
