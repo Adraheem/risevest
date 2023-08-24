@@ -4,6 +4,7 @@ import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import {AntDesign} from "@expo/vector-icons";
 import fontSize from "@/assets/fontSize";
+import {useRouter} from "expo-router";
 
 interface IProps {
 }
@@ -23,8 +24,17 @@ function PlanCard(props: IProps) {
 }
 
 export function NewPlanCard() {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/createPlan");
+  }
+
   return (
-    <TouchableOpacity activeOpacity={0.8} style={[styles.container, styles.newPlan]}>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={handleClick}
+      style={[styles.container, styles.newPlan]}
+    >
       <View style={styles.plusView}>
         <AntDesign name="plus" size={24} color={palette.brand}/>
       </View>

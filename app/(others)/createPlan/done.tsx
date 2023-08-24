@@ -1,28 +1,28 @@
 import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
-import Text from "@/components/Text";
-import fontSize from "@/assets/fontSize";
-import Button from "@/components/Button";
-import palette from "@/assets/palette";
 import Check from "@/assets/images/check";
+import Text from "@/components/Text";
 import {Link} from "expo-router";
+import Button from "@/components/Button";
+import fontSize from "@/assets/fontSize";
+import palette from "@/assets/palette";
 
 interface IProps {
 }
 
-function DoneScreen(props: IProps) {
+function Done(props: IProps) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
         <View style={styles.main}>
           <Check/>
-          <Text title style={styles.title}>You just created your Rise account</Text>
+          <Text title style={styles.title}>You just created your plan.</Text>
           <Text style={styles.text}>
-            Welcome to Rise, let’s take you home
+            Well done, Deborah
           </Text>
         </View>
-        <Link href="/home" replace asChild>
-          <Button text="Okay"/>
+        <Link href="/plan/iyeuyuquyueuyeq" replace asChild>
+          <Button text="View plan"/>
         </Link>
       </View>
     </SafeAreaView>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DoneScreen;
+export default Done;

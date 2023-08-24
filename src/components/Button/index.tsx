@@ -54,7 +54,7 @@ const Button = React.forwardRef((allProps: IProps, ref: any) => {
       case "PRIMARY-ALT":
         return {
           view: {
-            backgroundColor: palette.brand + "22",
+            backgroundColor: palette.offWhite003,
           },
           text: {
             color: palette.brand
