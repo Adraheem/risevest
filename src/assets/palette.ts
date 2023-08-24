@@ -8,6 +8,7 @@ const palette = {
   offWhite004: "rgba(113, 135, 156, 0.05)",
   orange: "#FE7122",
   indigo: "#B80074",
+  red: "#F04438",
 }
 
 export default palette;

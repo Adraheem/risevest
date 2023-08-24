@@ -6,15 +6,25 @@ import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import Button from "@/components/Button";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {useRouter} from "expo-router";
 
 interface IProps {
 }
 
 function OnboardScreen(props: IProps) {
+  const router = useRouter();
   const [active, setActive] = useState(0);
   const activeItem = useMemo(() => onboardList[active], [active]);
 
   const {bottom} = useSafeAreaInsets();
+
+  const handleSignup = () => {
+    router.push("/signup");
+  }
+
+  const handleLogin = () => {
+    router.push("/signin");
+  }
 
   return (
     <View style={styles.container}>
@@ -35,8 +45,8 @@ function OnboardScreen(props: IProps) {
         </View>
 
         <View style={{gap: 10, height: 114}}>
-          <Button text="Sign Up"/>
-          <Button text="Sign In" variant="PRIMARY-ALT"/>
+          <Button text="Sign Up" onPress={handleSignup}/>
+          <Button text="Sign In" variant="PRIMARY-ALT" onPress={handleLogin}/>
         </View>
       </View>
     </View>

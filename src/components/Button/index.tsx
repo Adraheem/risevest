@@ -1,11 +1,11 @@
 import React, {useMemo} from 'react';
 import {
-  View,
   StyleSheet,
+  TextProps,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  ViewStyle,
-  TextStyle, TextProps
+  ViewStyle
 } from 'react-native';
 import Text from "@/components/Text";
 import palette from "@/assets/palette";
@@ -15,9 +15,20 @@ interface IProps extends TouchableOpacityProps {
   size?: "SMALL" | "DEFAULT",
   variant?: "PRIMARY" | "PRIMARY-ALT",
   textProps?: TextProps,
+  loading?: boolean,
 }
 
-function Button({children, text, style, size, variant, textProps, ...props}: IProps) {
+function Button({
+                  children,
+                  text,
+                  style,
+                  size,
+                  variant,
+                  textProps,
+                  loading,
+                  disabled,
+                  ...props
+                }: IProps) {
   const sizeStyle: ViewStyle = useMemo(() => {
     switch (size) {
       case "SMALL":
@@ -59,7 +70,8 @@ function Button({children, text, style, size, variant, textProps, ...props}: IPr
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={[styles.button, sizeStyle, variantStyle.view, style]}
+      style={[styles.button, sizeStyle, variantStyle.view, {opacity: loading || disabled ? 0.3 : 1}, style]}
+      disabled={loading || disabled}
       {...props}
     >
       {text ? (
