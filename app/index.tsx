@@ -25,7 +25,7 @@ export default function App() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <Text style={styles.text}>Open up App.tsx to start working on your app!</Text>
-      <Link href="/onboard">Go to onboard</Link>
+      <Link href="/(auth)/onboard">Go to onboard</Link>
       <StatusBar style="auto"/>
     </View>
   );

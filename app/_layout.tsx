@@ -6,7 +6,9 @@ interface IProps {
 
 function RootLayout(props: IProps) {
   return (
-    <Stack screenOptions={{animation: "default", headerShown: false}}/>
+    <Stack screenOptions={{animation: "default", headerShown: false}}>
+      <Stack.Screen name="(main)"/>
+    </Stack>
   );
 }
 

@@ -1,12 +1,15 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import Text from "@/components/Text";
 
 interface IProps {
 }
 
-function SigninScreen(props: IProps) {
+function PlansScreen(props: IProps) {
   return (
-    <View style={styles.container}></View>
+    <View style={styles.container}>
+      <Text>Plans</Text>
+    </View>
   );
 }
 
@@ -16,4 +19,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SigninScreen;
+export default PlansScreen;
