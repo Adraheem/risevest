@@ -5,6 +5,7 @@ import Text from "@/components/Text";
 import {AntDesign} from "@expo/vector-icons";
 import fontSize from "@/assets/fontSize";
 import {useRouter} from "expo-router";
+import {ImageBackground} from "expo-image";
 
 interface IProps {
 }
@@ -12,13 +13,24 @@ interface IProps {
 const width = Math.min(250, (Dimensions.get("screen").width * 0.5));
 
 function PlanCard(props: IProps) {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push("/plan/duiwuweiwuiiw");
+  }
+
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.container}>
-      <View>
-        <Text style={{color: palette.white}}>Build Wealth</Text>
-        <Text title style={{fontSize: fontSize.medium, color: palette.white}}>$188.25</Text>
-        <Text style={{color: palette.white}}>Mixed assets</Text>
-      </View>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={handleClick}
+      style={styles.container}
+    >
+      <ImageBackground source={require("@/assets/images/purple-2.png")} style={styles.bg}>
+        <View>
+          <Text style={{color: palette.white}}>Build Wealth</Text>
+          <Text title style={{fontSize: fontSize.medium, color: palette.white}}>$188.25</Text>
+          <Text style={{color: palette.white}}>Mixed assets</Text>
+        </View>
+      </ImageBackground>
     </TouchableOpacity>
   );
 }
@@ -49,6 +61,11 @@ const styles = StyleSheet.create({
     height: width * 4 / 3,
     borderRadius: 15,
     backgroundColor: palette.offBlack,
+    overflow: "hidden",
+  },
+  bg: {
+    width: "100%",
+    flex: 1,
     padding: 16,
     justifyContent: "flex-end",
   },

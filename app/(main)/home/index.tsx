@@ -4,9 +4,6 @@ import Screen from "@/components/Screen";
 import {Image} from "expo-image";
 import palette from "@/assets/palette";
 import Greetings from "@/screenComponents/home/Greetings";
-import Text from "@/components/Text";
-import {Feather, MaterialCommunityIcons} from "@expo/vector-icons";
-import fontSize from "@/assets/fontSize";
 import Balance from "@/screenComponents/home/Balance";
 import Plans from "@/screenComponents/home/Plans";
 import NeedHelp from "@/screenComponents/home/NeedHelp";
@@ -50,7 +47,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get("screen").width,
     height: Dimensions.get("screen").width,
     position: "absolute",
-    zIndex: 1,
+    zIndex: 0,
   },
   rise: {
     marginVertical: 30,

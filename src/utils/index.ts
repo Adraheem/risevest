@@ -1,8 +1,8 @@
 import {format} from "date-fns";
 
 class Utils {
-  public formatDate(date: Date): string {
-    return format(date, "MMMM dd, yyyy");
+  public formatDate(date: Date, pattern?: string): string {
+    return format(date, pattern ?? "MMMM dd, yyyy");
   }
 }
 

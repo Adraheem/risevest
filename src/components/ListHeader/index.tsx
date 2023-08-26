@@ -15,12 +15,12 @@ function ListHeader({title, moreActive, moreText}: IProps) {
   return (
     <View style={styles.container}>
       <Text title style={styles.title}>
-        Create a plan
+        {title}
       </Text>
       {
         moreText && (
           <Text style={[styles.more, {color: moreActive ? palette.brand : palette.offBlack + "77"}]}>
-            View all plans<Feather name="chevron-right" size={18} color={moreActive ? palette.brand : palette.offBlack + "77"}/>
+            {moreText}<Feather name="chevron-right" size={18} color={moreActive ? palette.brand : palette.offBlack + "77"}/>
           </Text>
         )
       }

@@ -14,10 +14,9 @@ interface IProps extends ScrollViewProps {
 function Screen({children, contentContainerStyle, style, ...props}: IProps) {
   return (
     <ScrollView
-      keyboardDismissMode="interactive"
-      keyboardShouldPersistTaps="handled"
+      keyboardShouldPersistTaps="never"
       contentContainerStyle={[styles.container, contentContainerStyle]}
-      style={[{backgroundColor: palette.white}, style]}
+      style={[{backgroundColor: palette.white, flex: 1}, style]}
       {...props}
     >
       <KeyboardAvoidingView
@@ -34,7 +33,7 @@ function Screen({children, contentContainerStyle, style, ...props}: IProps) {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: "100%",
+    // minHeight: "100%",
     backgroundColor: palette.white,
   }
 });
