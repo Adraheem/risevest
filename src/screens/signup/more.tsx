@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import * as yup from "yup";
 import Screen from "@/components/Screen";
 import Text from "@/components/Text";
@@ -8,10 +8,12 @@ import {Formik} from "formik";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import fontSize from "@/assets/fontSize";
-import {Link, useRouter} from "expo-router";
 import DatePicker from "@/components/DatePicker";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<RootStackParamList, "Onboard">
 }
 
 interface InputFields {
@@ -22,7 +24,7 @@ interface InputFields {
   dob?: Date,
 }
 
-function MoreScreen(props: IProps) {
+function SignupMoreScreen({navigation}: IProps) {
   const validationSchema = yup.object().shape({
     firstName: yup.string().required("Required *"),
     lastName: yup.string().required("Required *"),
@@ -30,8 +32,6 @@ function MoreScreen(props: IProps) {
     phoneNumber: yup.string().required("Required *"),
     dob: yup.date().max(new Date(), "Invalid date").required("Required *"),
   });
-
-  const router = useRouter();
 
   const initialValue: InputFields = {
     firstName: "",
@@ -42,7 +42,7 @@ function MoreScreen(props: IProps) {
   }
 
   const onSubmit = () => {
-    router.replace("/signup/done");
+    navigation.push("SignupDone")
   }
 
   return (
@@ -120,8 +120,8 @@ function MoreScreen(props: IProps) {
 
                 <Text style={{textAlign: "center", width: "80%", alignSelf: "center"}}>
                   By clicking Continue, you agree to our{" "}
-                  <Link href="/" style={{color: palette.brand}}>Terms of Service</Link> and <Link
-                  href="/" style={{color: palette.brand}}>Privacy Policy.</Link>
+                  <Text style={{color: palette.brand}}>Terms of Service</Text> and <Text
+                  style={{color: palette.brand}}>Privacy Policy.</Text>
                 </Text>
               </View>
             )}
@@ -151,4 +151,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default MoreScreen;
+export default SignupMoreScreen;

@@ -1,10 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, SafeAreaView} from 'react-native';
+import {Dimensions, SafeAreaView, StyleSheet, View} from 'react-native';
 import {IOnboard} from "@/types/common";
 import {Image} from "expo-image";
-import Text from "@/components/Text";
-import fontSize from "@/assets/fontSize";
-import Button from "@/components/Button";
 
 interface IProps extends IOnboard {
   position: number;

@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import {Ionicons} from "@expo/vector-icons";
 import palette from "@/assets/palette";
-import {useRouter} from "expo-router";
+import {useNavigation} from "@react-navigation/native";
 
 interface IProps {
   type?: "BACK" | "CLOSE",
@@ -12,10 +12,10 @@ interface IProps {
 }
 
 function Header({type = "BACK", title}: IProps) {
-  const router = useRouter();
+  const navigation = useNavigation();
   const handleBack = () => {
-    if (router.canGoBack()) {
-      router.back();
+    if (navigation.canGoBack()) {
+      navigation.goBack();
     }
   }
 

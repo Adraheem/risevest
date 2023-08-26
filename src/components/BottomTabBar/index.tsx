@@ -10,8 +10,9 @@ import WalletIcon from "@/assets/images/WalletIcon";
 import FeedIcon from "@/assets/images/FeedIcon";
 import {BlurView} from "expo-blur";
 import BottomTabBarItem from "@/components/BottomTabBar/BottomTabBarItem";
+import {BottomTabBarOptions} from "@react-navigation/bottom-tabs";
 
-interface IProps extends BottomTabBarProps {
+interface IProps extends BottomTabBarProps<BottomTabBarOptions> {
 }
 
 function BottomTabBar(props: IProps) {
@@ -24,41 +25,41 @@ function BottomTabBar(props: IProps) {
         <BottomTabBarItem
           active={props.state.index}
           name="Home"
-          path="/home"
+          path="Home"
           icon={HomeIcon}
-          id={props.state.routeNames.findIndex(r => r === "home/index")}
+          id={props.state.routeNames.findIndex(r => r === "Home")}
         />
 
         <BottomTabBarItem
           active={props.state.index}
           name="Plans"
-          path="/plans"
+          path="Plans"
           icon={PlansIcon}
-          id={props.state.routeNames.findIndex(r => r === "plans/index")}
+          id={props.state.routeNames.findIndex(r => r === "Plans")}
         />
 
         <BottomTabBarItem
           active={props.state.index}
           name="Wallet"
-          path="/wallet"
+          path="Wallet"
           icon={WalletIcon}
-          id={props.state.routeNames.findIndex(r => r === "wallet/index")}
+          id={props.state.routeNames.findIndex(r => r === "Wallet")}
         />
 
         <BottomTabBarItem
           active={props.state.index}
           name="Feed"
-          path="/feed"
+          path="Feed"
           icon={FeedIcon}
-          id={props.state.routeNames.findIndex(r => r === "feed/index")}
+          id={props.state.routeNames.findIndex(r => r === "Feed")}
         />
 
         <BottomTabBarItem
           active={props.state.index}
           name="Account"
-          path="/account"
+          path="Account"
           icon={HomeIcon}
-          id={props.state.routeNames.findIndex(r => r === "account/index")}
+          id={props.state.routeNames.findIndex(r => r === "Account")}
         />
       </View>
     </Bar>

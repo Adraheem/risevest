@@ -2,17 +2,19 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
 import Header from "@/components/Header";
 import Screen from "@/components/Screen";
-import {Link} from "expo-router";
 import Button from "@/components/Button";
 import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {NewPlanParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<NewPlanParamList>
 }
 
-function Review(props: IProps) {
+function Review({navigation}: IProps) {
   return (
     <View style={styles.container}>
       <Header title="Review"/>
@@ -57,12 +59,9 @@ function Review(props: IProps) {
             </Text>
 
             <View style={{gap: 10}}>
-              <Link href="/createPlan/done" replace asChild>
-                <Button text="Agree & Continue"/>
-              </Link>
-              <Link href="/createPlan" asChild>
-                <Button text="Start over" variant="PRIMARY-ALT"/>
-              </Link>
+              <Button text="Agree & Continue" onPress={() => navigation.push("PlanDone")}/>
+              <Button text="Start over" variant="PRIMARY-ALT"
+                      onPress={() => navigation.pop(4)}/>
             </View>
           </View>
         </Screen>

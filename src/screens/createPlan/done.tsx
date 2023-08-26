@@ -1,16 +1,19 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import Check from "@/assets/images/check";
 import Text from "@/components/Text";
-import {Link} from "expo-router";
 import Button from "@/components/Button";
 import fontSize from "@/assets/fontSize";
 import palette from "@/assets/palette";
+import {CompositeNavigationProp} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {NewPlanParamList, RootStackParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: CompositeNavigationProp<StackNavigationProp<NewPlanParamList>, StackNavigationProp<RootStackParamList>>
 }
 
-function Done(props: IProps) {
+function Done({navigation}: IProps) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -21,9 +24,7 @@ function Done(props: IProps) {
             Well done, Deborah
           </Text>
         </View>
-        <Link href="/plan/iyeuyuquyueuyeq" replace asChild>
-          <Button text="View plan"/>
-        </Link>
+        <Button text="View plan" onPress={() => navigation.replace("Plan", {id: "hiwiwuiueow"})}/>
       </View>
     </SafeAreaView>
   );

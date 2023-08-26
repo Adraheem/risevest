@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
 import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import {AntDesign} from "@expo/vector-icons";
 import fontSize from "@/assets/fontSize";
-import {useRouter} from "expo-router";
 import {ImageBackground} from "expo-image";
+import {useNavigation} from "@react-navigation/native";
 
 interface IProps {
 }
@@ -13,9 +13,10 @@ interface IProps {
 const width = Math.min(250, (Dimensions.get("screen").width * 0.5));
 
 function PlanCard(props: IProps) {
-  const router = useRouter();
+  const navigation = useNavigation();
+
   const handleClick = () => {
-    router.push("/plan/duiwuweiwuiiw");
+    navigation.navigate("Plan", {id: "ueywuwyueywuw"})
   }
 
   return (
@@ -36,9 +37,9 @@ function PlanCard(props: IProps) {
 }
 
 export function NewPlanCard() {
-  const router = useRouter();
+  const navigation = useNavigation();
   const handleClick = () => {
-    router.push("/createPlan");
+    navigation.navigate("NewPlan")
   }
 
   return (

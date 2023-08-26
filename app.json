@@ -29,9 +29,6 @@
     },
     "experiments": {
       "tsconfigPaths": true
-    },
-    "plugins": [
-      "expo-router"
-    ]
+    }
   }
 }

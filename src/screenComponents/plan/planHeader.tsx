@@ -1,20 +1,20 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Feather, Ionicons} from "@expo/vector-icons";
 import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import {ImageBackground} from "expo-image";
 import fontSize from "@/assets/fontSize";
-import {useRouter} from "expo-router";
+import {useNavigation} from "@react-navigation/native";
 
 interface IProps {
 }
 
 function PlanHeader(props: IProps) {
-  const router = useRouter();
+  const navigation = useNavigation();
   const handleBack = () => {
-    if (router.canGoBack()) {
-      router.back();
+    if (navigation.canGoBack()) {
+      navigation.goBack();
     }
   }
 

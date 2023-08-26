@@ -1,7 +1,7 @@
 {
   "name": "risevest-test",
   "version": "1.0.0",
-  "main": "expo-router/entry",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -11,14 +11,16 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-native-community/datetimepicker": "7.2.0",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^5.x",
+    "@react-navigation/native": "^5.x",
+    "@react-navigation/stack": "^5.x",
     "date-fns": "^2.30.0",
     "expo": "~49.0.8",
     "expo-blur": "~12.4.1",
     "expo-constants": "~14.4.2",
     "expo-font": "~11.4.0",
     "expo-image": "~1.3.2",
-    "expo-linking": "~5.0.2",
-    "expo-router": "2.0.0",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "formik": "^2.4.3",

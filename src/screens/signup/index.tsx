@@ -9,12 +9,14 @@ import {Formik, FormikHelpers} from "formik";
 import * as yup from "yup";
 import {MaterialIcons} from "@expo/vector-icons";
 import Screen from "@/components/Screen";
-import {useRouter} from "expo-router";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<RootStackParamList>
 }
 
-function SignupScreen(props: IProps) {
+function SignupScreen({navigation}: IProps) {
   const validationSchema = yup.object().shape({
     email: yup.string().email("Invalid email format").required("Required *"),
     password: yup.string().test("strongPw", "", (value) => {
@@ -23,15 +25,13 @@ function SignupScreen(props: IProps) {
       .required("Required *"),
   });
 
-  const router = useRouter();
-
   const initialValue = {
     email: "",
     password: "",
   }
 
   const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
-    router.push("/signup/more");
+    navigation.push("SignupMore")
   }
 
   return (

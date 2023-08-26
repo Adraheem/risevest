@@ -3,9 +3,9 @@ import {StyleSheet, View} from 'react-native';
 import {useFonts} from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import {useCallback} from "react";
-import Text from "@/components/Text";
 import fonts from "@/assets/fonts";
-import {Link} from "expo-router";
+import RootNavigation from "@/navigation/RootNavigation";
+import palette from "@/assets/palette";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,9 +24,8 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text style={styles.text}>Open up App.tsx to start working on your app!</Text>
-      <Link href="/(auth)/onboard">Go to onboard</Link>
       <StatusBar style="auto"/>
+      <RootNavigation/>
     </View>
   );
 }
@@ -34,12 +33,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: palette.white,
   },
-  text: {
-    fontWeight: "800",
-    // fontSize: 24,
-  }
 });

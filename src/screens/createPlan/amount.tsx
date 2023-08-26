@@ -1,33 +1,32 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import Header from "@/components/Header";
 import Button from "@/components/Button";
-import {Link} from "expo-router";
 import CreatePlanProgress from "@/screenComponents/createPlan/createPlanProgress";
+import Input from "@/components/Input";
 import palette from "@/assets/palette";
 import Screen from "@/components/Screen";
-import Input from "@/components/Input";
-import DatePicker from "@/components/DatePicker";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {NewPlanParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<NewPlanParamList>
 }
 
-function PlanDate(props: IProps) {
+function PlanAmount({navigation}: IProps) {
   return (
     <View style={styles.container}>
-      <Header title="Target date"/>
+      <Header title="Target amount"/>
       <SafeAreaView style={{flex: 1}}>
         <Screen>
           <View style={{padding: 20}}>
-            <CreatePlanProgress step={3} total={3}/>
+            <CreatePlanProgress step={2} total={3}/>
 
             <View style={{marginVertical: 26}}>
-              <DatePicker placeholder="When do you want to withdraw?"/>
+              <Input placeholder="How much do need?" inputMode="decimal"/>
             </View>
 
-            <Link href="/createPlan/review" asChild>
-              <Button text="Continue"/>
-            </Link>
+            <Button text="Continue" onPress={() => navigation.push("PlanDate")}/>
           </View>
         </Screen>
       </SafeAreaView>
@@ -42,4 +41,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PlanDate;
+export default PlanAmount;

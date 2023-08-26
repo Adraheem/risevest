@@ -6,24 +6,25 @@ import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import Button from "@/components/Button";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
-import {useRouter} from "expo-router";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<RootStackParamList, "Onboard">
 }
 
-function OnboardScreen(props: IProps) {
-  const router = useRouter();
+function OnboardScreen({navigation}: IProps) {
   const [active, setActive] = useState(0);
   const activeItem = useMemo(() => onboardList[active], [active]);
 
   const {bottom} = useSafeAreaInsets();
 
   const handleSignup = () => {
-    router.push("/signup");
+    navigation.push("Signup")
   }
 
   const handleLogin = () => {
-    router.push("/signin");
+    navigation.push("Login")
   }
 
   return (

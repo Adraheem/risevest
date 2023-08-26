@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import * as yup from "yup";
-import {useRouter} from "expo-router";
 import {Formik, FormikHelpers} from "formik";
 import Screen from "@/components/Screen";
 import Text from "@/components/Text";
@@ -9,17 +8,18 @@ import palette from "@/assets/palette";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import fontSize from "@/assets/fontSize";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<RootStackParamList>
 }
 
-function SigninScreen(props: IProps) {
+function SigninScreen({navigation}: IProps) {
   const validationSchema = yup.object().shape({
     email: yup.string().email("Invalid email format").required("Required *"),
     password: yup.string().required("Required *"),
   });
-
-  const router = useRouter();
 
   const initialValue = {
     email: "",
@@ -27,11 +27,11 @@ function SigninScreen(props: IProps) {
   }
 
   const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
-    router.replace("/home");
+    navigation.push("Tab")
   }
 
   const signup = () => {
-    router.push("/signup");
+    navigation.push("Signup")
   }
 
   return (

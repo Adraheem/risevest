@@ -1,9 +1,9 @@
 import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Text from "@/components/Text";
-import {useRouter} from "expo-router";
 import fontSize from "@/assets/fontSize";
 import palette from "@/assets/palette";
+import {useNavigation} from "@react-navigation/native";
 
 interface IProps {
   active: number;
@@ -14,14 +14,13 @@ interface IProps {
 }
 
 function BottomTabBarItem({active, path, name, icon: Icon, id}: IProps) {
-  const router = useRouter();
-
+  const navigation = useNavigation();
   const isSelected = useMemo(() => active === id, [active, id]);
 
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => router.push(path)}
+      onPress={() => navigation.navigate(path)}
       activeOpacity={0.8}
     >
       <Icon size={32} color={isSelected ? palette.brand : palette.offBlack}/>

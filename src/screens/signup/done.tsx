@@ -1,16 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import Button from "@/components/Button";
 import palette from "@/assets/palette";
 import Check from "@/assets/images/check";
-import {Link} from "expo-router";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {RootStackParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<RootStackParamList, "Onboard">
 }
 
-function DoneScreen(props: IProps) {
+function SignupDoneScreen({navigation}: IProps) {
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -21,9 +23,7 @@ function DoneScreen(props: IProps) {
             Welcome to Rise, let’s take you home
           </Text>
         </View>
-        <Link href="/home" replace asChild>
-          <Button text="Okay"/>
-        </Link>
+        <Button text="Okay" onPress={() => navigation.push("Tab")}/>
       </View>
     </SafeAreaView>
   );
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DoneScreen;
+export default SignupDoneScreen;

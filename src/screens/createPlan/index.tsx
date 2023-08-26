@@ -6,12 +6,14 @@ import palette from "@/assets/palette";
 import {Image} from "expo-image";
 import Button from "@/components/Button";
 import {AntDesign, Ionicons} from "@expo/vector-icons";
-import {Link} from "expo-router";
+import {StackNavigationProp} from "@react-navigation/stack";
+import {NewPlanParamList} from "@/types/navigation";
 
 interface IProps {
+  navigation: StackNavigationProp<NewPlanParamList>
 }
 
-function CreatePlanScreen(props: IProps) {
+function CreatePlanScreen({navigation}: IProps) {
   return (
     <View style={styles.container}>
       <Header type="CLOSE" title="Create a plan"/>
@@ -41,9 +43,7 @@ function CreatePlanScreen(props: IProps) {
             />
           </View>
 
-          <Link href="/createPlan/name" asChild>
-            <Button text="Continue"/>
-          </Link>
+          <Button text="Continue" onPress={() => navigation.push("PlanName")}/>
         </View>
       </SafeAreaView>
     </View>
