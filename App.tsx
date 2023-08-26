@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <StatusBar style="auto"/>
+      <StatusBar style="inverted"/>
       <Provider store={store}>
         <QueryClientProvider client={queryClient}>
           <RootNavigation/>

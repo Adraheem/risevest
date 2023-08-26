@@ -4,16 +4,20 @@ import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import palette from "@/assets/palette";
 import {Ionicons} from "@expo/vector-icons";
+import {useQuery} from "react-query";
+import authService from "@/services/auth.service";
 
 interface IProps {
 }
 
 function Greetings(props: IProps) {
+  const {data} = useQuery("session", authService.getSession);
+
   return (
     <View style={{flexDirection: "row", alignItems: "center"}}>
       <View style={{flex: 1}}>
         <Text>Good morning ☀️</Text>
-        <Text style={{fontSize: fontSize.large}}>Raheem</Text>
+        <Text style={{fontSize: fontSize.large}}>{data?.first_name}</Text>
       </View>
       <View style={{
         backgroundColor: palette.brand,

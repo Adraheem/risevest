@@ -10,6 +10,9 @@ import Button from "@/components/Button";
 import fontSize from "@/assets/fontSize";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "@/types/navigation";
+import authService from "@/services/auth.service";
+import {EmailAndPassword} from "@/types/auth";
+import utils from "@/utils";
 
 interface IProps {
   navigation: StackNavigationProp<RootStackParamList>
@@ -17,17 +20,19 @@ interface IProps {
 
 function SigninScreen({navigation}: IProps) {
   const validationSchema = yup.object().shape({
-    email: yup.string().email("Invalid email format").required("Required *"),
+    email_address: yup.string().email("Invalid email format").required("Required *"),
     password: yup.string().required("Required *"),
   });
 
-  const initialValue = {
-    email: "",
+  const initialValue: EmailAndPassword = {
+    email_address: "",
     password: "",
   }
 
-  const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
-    navigation.push("Tab")
+  const onSubmit = (values: EmailAndPassword, helpers: FormikHelpers<EmailAndPassword>) => {
+    authService.login(values)
+      .then()
+      .catch(err => utils.handleRequestError(err, helpers));
   }
 
   const signup = () => {
@@ -65,10 +70,13 @@ function SigninScreen({navigation}: IProps) {
               <View style={{gap: 20, marginTop: 40, flex: 1}}>
                 <Input
                   placeholder="Email address"
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                  error={touched.email && errors.email ? errors.email : ""}
+                  inputMode="email"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  onChangeText={handleChange("email_address")}
+                  onBlur={handleBlur("email_address")}
+                  value={values.email_address}
+                  error={touched.email_address && errors.email_address ? errors.email_address : ""}
                 />
                 <Input
                   placeholder="Password"

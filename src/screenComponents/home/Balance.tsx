@@ -5,11 +5,16 @@ import {Entypo, Feather, MaterialCommunityIcons} from "@expo/vector-icons";
 import palette from "@/assets/palette";
 import fontSize from "@/assets/fontSize";
 import Button from "@/components/Button";
+import {useQuery} from "react-query";
+import authService from "@/services/auth.service";
+import utils from "@/utils";
 
 interface IProps {
 }
 
 function Balance(props: IProps) {
+  const {data} = useQuery("session", authService.getSession);
+
   return (
     <View style={{marginBottom: 10}}>
       <View style={styles.container}>
@@ -22,7 +27,9 @@ function Balance(props: IProps) {
           />
         </View>
 
-        <Text title style={{fontSize: fontSize.xxl}}>$287.82</Text>
+        <Text title style={{fontSize: fontSize.xxl}}>
+          ${utils.numberWithCommas(data?.total_balance.toFixed(2))}
+        </Text>
 
         <View style={[styles.row, {gap: 0}]}>
           <Text>Total Gains</Text>

@@ -20,7 +20,7 @@ function SignupDoneScreen({route}: IProps) {
     onSuccess(data) {
       queryClient.setQueryData("session", data);
     }
-  })
+  });
 
   const handleClick = () => {
     mutate(route.params)
