@@ -1,28 +1,47 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ActivityIndicator, TouchableOpacity, Share} from 'react-native';
 import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import {Feather} from "@expo/vector-icons";
+import {useQuery} from "react-query";
+import quoteService from "@/services/quote.service";
 
 interface IProps {
 }
 
 function TodayQuote(props: IProps) {
+  const {isLoading, data, isError} = useQuery("quote", quoteService.getQuote);
+
+  const share = () => {
+    if (!isLoading && data) {
+      Share.share({
+        message: `${data.quote}\n\nBy ${data.author}`
+      })
+    }
+  }
+
+  if (isError) return null;
+
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Text style={{color: palette.white}}>TODAY’S QUOTE</Text>
         <View style={styles.line}/>
         <Text style={{color: palette.white}}>
-          We have no intention of rotating capital out of strong multi-year investments because
-          they’ve recently done well or because ‘growth’ has out performed ‘value’.
+          {
+            isLoading ? <ActivityIndicator color={palette.white}/> : data?.quote
+          }
         </Text>
 
         <View style={styles.shareContainer}>
-          <Text style={{color: palette.white, fontWeight: "700"}}>Carl Sagan</Text>
-          <View style={styles.share}>
+          <Text style={{color: palette.white, fontWeight: "700"}}>
+            {
+              isLoading ? <ActivityIndicator color={palette.white}/> : data?.author
+            }
+          </Text>
+          <TouchableOpacity activeOpacity={0.8} onPress={share} style={styles.share}>
             <Feather name="share-2" size={24} color={palette.white}/>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
