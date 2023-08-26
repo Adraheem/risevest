@@ -9,6 +9,7 @@ import PlanBalance from "@/screenComponents/plan/planBalance";
 import PlanProgress from "@/screenComponents/plan/planProgress";
 import PlanDetails from "@/screenComponents/plan/planDetails";
 import RecentTransactions from "@/screenComponents/plan/recentTransactions";
+import PlanChart from "@/screenComponents/plan/planChart";
 
 interface IProps {
 }
@@ -30,6 +31,8 @@ function IndividualPlan(props: IProps) {
             variant="PRIMARY-ALT"
             iconBefore={<Entypo name="plus" size={24} color={palette.brand}/>}
           />
+
+          <PlanChart/>
 
           <PlanDetails/>
 
