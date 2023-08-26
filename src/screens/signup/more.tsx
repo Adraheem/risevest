@@ -4,45 +4,47 @@ import * as yup from "yup";
 import Screen from "@/components/Screen";
 import Text from "@/components/Text";
 import palette from "@/assets/palette";
-import {Formik} from "formik";
+import {Formik, FormikHelpers} from "formik";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import fontSize from "@/assets/fontSize";
 import DatePicker from "@/components/DatePicker";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "@/types/navigation";
+import {SignupParamList} from "@/types/navigation";
+import {MoreSignupInfo} from "@/types/auth";
+import {useSignupContext} from "@/context/SignupContext";
+import authService from "@/services/auth.service";
+import utils from "@/utils";
 
 interface IProps {
-  navigation: StackNavigationProp<RootStackParamList, "Onboard">
-}
-
-interface InputFields {
-  firstName: string,
-  lastName: string,
-  nickname: string,
-  phoneNumber: string,
-  dob?: Date,
+  navigation: StackNavigationProp<SignupParamList, "SignupMore">
 }
 
 function SignupMoreScreen({navigation}: IProps) {
+  const {data} = useSignupContext();
   const validationSchema = yup.object().shape({
-    firstName: yup.string().required("Required *"),
-    lastName: yup.string().required("Required *"),
-    nickname: yup.string().required("Required *"),
-    phoneNumber: yup.string().required("Required *"),
-    dob: yup.date().max(new Date(), "Invalid date").required("Required *"),
+    first_name: yup.string().required("Required *"),
+    last_name: yup.string().required("Required *"),
+    date_of_birth: yup.date().max(new Date(), "Invalid date").required("Required *"),
   });
 
-  const initialValue: InputFields = {
-    firstName: "",
-    lastName: "",
-    nickname: "",
-    phoneNumber: "",
-    dob: undefined,
+  const initialValue: MoreSignupInfo = {
+    first_name: "",
+    last_name: "",
+    date_of_birth: undefined,
   }
 
-  const onSubmit = () => {
-    navigation.push("SignupDone")
+  const onSubmit = (values: MoreSignupInfo, helpers: FormikHelpers<MoreSignupInfo>) => {
+    if (data) {
+      authService.signup({...data, ...values})
+        .then(() => {
+          navigation.replace("SignupDone", {
+            email_address: data.email_address,
+            password: data.password
+          });
+        })
+        .catch(err => utils.handleRequestError(err, helpers))
+    }
   }
 
   return (
@@ -75,18 +77,18 @@ function SignupMoreScreen({navigation}: IProps) {
               <View style={{gap: 20, marginTop: 40}}>
                 <Input
                   placeholder="Legal First Name"
-                  onChangeText={handleChange("firstName")}
-                  onBlur={handleBlur("firstName")}
-                  value={values.firstName}
-                  error={touched.firstName && errors.firstName ? errors.firstName : ""}
+                  onChangeText={handleChange("first_name")}
+                  onBlur={handleBlur("first_name")}
+                  value={values.first_name}
+                  error={touched.first_name && errors.first_name ? errors.first_name : ""}
                 />
 
                 <Input
                   placeholder="Legal Last Name"
-                  onChangeText={handleChange("lastName")}
-                  onBlur={handleBlur("lastName")}
-                  value={values.lastName}
-                  error={touched.lastName && errors.lastName ? errors.lastName : ""}
+                  onChangeText={handleChange("last_name")}
+                  onBlur={handleBlur("last_name")}
+                  value={values.last_name}
+                  error={touched.last_name && errors.last_name ? errors.last_name : ""}
                 />
 
                 <Input
@@ -99,19 +101,19 @@ function SignupMoreScreen({navigation}: IProps) {
 
                 <Input
                   placeholder="Phone Number"
-                  onChangeText={handleChange("phoneNumber")}
-                  onBlur={handleBlur("phoneNumber")}
-                  value={values.phoneNumber}
-                  error={touched.phoneNumber && errors.phoneNumber ? errors.phoneNumber : ""}
+                  onChangeText={handleChange("phone_number")}
+                  onBlur={handleBlur("phone_number")}
+                  value={values.phone_number}
+                  error={touched.phone_number && errors.phone_number ? errors.phone_number : ""}
                   inputMode="tel"
                 />
 
                 <DatePicker
                   placeholder="Date of Birth"
-                  onChange={handleChange("dob")}
-                  onBlur={handleBlur("dob")}
-                  value={values.dob}
-                  error={touched.dob && errors.dob ? errors.dob : ""}
+                  onChange={handleChange("date_of_birth")}
+                  onBlur={handleBlur("date_of_birth")}
+                  value={values.date_of_birth}
+                  error={touched.date_of_birth && errors.date_of_birth ? errors.date_of_birth : ""}
                   maximumDate={new Date()}
                 />
 
@@ -136,7 +138,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: palette.white,
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
+    paddingBottom: 40
   },
   title: {
     fontWeight: "500",

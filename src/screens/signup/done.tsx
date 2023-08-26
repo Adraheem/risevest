@@ -5,14 +5,27 @@ import fontSize from "@/assets/fontSize";
 import Button from "@/components/Button";
 import palette from "@/assets/palette";
 import Check from "@/assets/images/check";
-import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "@/types/navigation";
+import {SignupParamList} from "@/types/navigation";
+import {useMutation, useQueryClient} from "react-query";
+import authService from "@/services/auth.service";
+import {RouteProp} from "@react-navigation/native";
 
 interface IProps {
-  navigation: StackNavigationProp<RootStackParamList, "Onboard">
+  route: RouteProp<SignupParamList, "SignupDone">
 }
 
-function SignupDoneScreen({navigation}: IProps) {
+function SignupDoneScreen({route}: IProps) {
+  const queryClient = useQueryClient();
+  const {mutate, isLoading} = useMutation(authService.login, {
+    onSuccess(data) {
+      queryClient.setQueryData("session", data);
+    }
+  })
+
+  const handleClick = () => {
+    mutate(route.params)
+  }
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -23,7 +36,7 @@ function SignupDoneScreen({navigation}: IProps) {
             Welcome to Rise, let’s take you home
           </Text>
         </View>
-        <Button text="Okay" onPress={() => navigation.push("Tab")}/>
+        <Button text="Okay" loading={isLoading} onPress={handleClick}/>
       </View>
     </SafeAreaView>
   );

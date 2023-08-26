@@ -6,11 +6,15 @@ import {useCallback} from "react";
 import fonts from "@/assets/fonts";
 import RootNavigation from "@/navigation/RootNavigation";
 import palette from "@/assets/palette";
+import {QueryClient, QueryClientProvider} from "react-query";
+import {Provider} from "react-redux";
+import {store} from "@/redux/store";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts(fonts);
+  const queryClient = new QueryClient()
 
   const onLayoutRootView = useCallback(() => {
     if (fontsLoaded || fontError) {
@@ -25,7 +29,11 @@ export default function App() {
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar style="auto"/>
-      <RootNavigation/>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <RootNavigation/>
+        </QueryClientProvider>
+      </Provider>
     </View>
   );
 }

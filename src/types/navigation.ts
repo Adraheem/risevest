@@ -1,11 +1,11 @@
+import {EmailAndPassword} from "@/types/auth";
+
 export type RootStackParamList = {
   Onboard: undefined,
   Tab: undefined,
   NewPlan: undefined,
   Login: undefined,
   Signup: undefined,
-  SignupMore: undefined,
-  SignupDone: undefined,
   Plan: { id: string },
 };
 
@@ -21,4 +21,10 @@ export type NewPlanParamList = {
   PlanDate: undefined,
   PlanReview: undefined,
   PlanDone: undefined,
+}
+
+export type SignupParamList = {
+  Main: undefined,
+  SignupMore: undefined,
+  SignupDone: EmailAndPassword,
 }

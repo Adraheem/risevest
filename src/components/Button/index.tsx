@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import {
+  ActivityIndicator,
   StyleSheet,
   TextProps,
   TextStyle,
@@ -49,7 +50,7 @@ const Button = React.forwardRef((allProps: IProps, ref: any) => {
     }
   }, [size]);
 
-  const variantStyle: { view: ViewStyle, text: TextStyle } = useMemo(() => {
+  const variantStyle: { view: ViewStyle, text: TextStyle, loading: string } = useMemo(() => {
     switch (variant) {
       case "PRIMARY-ALT":
         return {
@@ -58,7 +59,8 @@ const Button = React.forwardRef((allProps: IProps, ref: any) => {
           },
           text: {
             color: palette.brand
-          }
+          },
+          loading: palette.brand,
         }
 
       case "PRIMARY-OUTLINE":
@@ -70,7 +72,8 @@ const Button = React.forwardRef((allProps: IProps, ref: any) => {
           },
           text: {
             color: palette.brand
-          }
+          },
+          loading: palette.brand,
         }
 
       default:
@@ -81,6 +84,7 @@ const Button = React.forwardRef((allProps: IProps, ref: any) => {
           text: {
             color: palette.white,
           },
+          loading: palette.white,
         }
     }
   }, [variant]);
@@ -93,16 +97,24 @@ const Button = React.forwardRef((allProps: IProps, ref: any) => {
       ref={ref}
       {...props}
     >
-      {iconBefore}
-      {text ? (
-        <Text
-          {...textProps}
-          style={[styles.text, variantStyle.text, textProps?.style]}
-        >
-          {text}
-        </Text>
-      ) : children}
-      {iconAfter}
+      {
+        loading ? (
+          <ActivityIndicator size="small" color={variantStyle.loading}/>
+        ) : (
+          <>
+            {iconBefore}
+            {text ? (
+              <Text
+                {...textProps}
+                style={[styles.text, variantStyle.text, textProps?.style]}
+              >
+                {text}
+              </Text>
+            ) : children}
+            {iconAfter}
+          </>
+        )
+      }
     </TouchableOpacity>
   );
 });

@@ -10,27 +10,32 @@ import * as yup from "yup";
 import {MaterialIcons} from "@expo/vector-icons";
 import Screen from "@/components/Screen";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "@/types/navigation";
+import {SignupParamList} from "@/types/navigation";
+import {useSignupContext} from "@/context/SignupContext";
+import {EmailAndPassword} from "@/types/auth";
 
 interface IProps {
-  navigation: StackNavigationProp<RootStackParamList>
+  navigation: StackNavigationProp<SignupParamList>
 }
 
 function SignupScreen({navigation}: IProps) {
+  const {save} = useSignupContext();
+
   const validationSchema = yup.object().shape({
-    email: yup.string().email("Invalid email format").required("Required *"),
+    email_address: yup.string().email("Invalid email format").required("Required *"),
     password: yup.string().test("strongPw", "", (value) => {
       return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/.test(value ?? "");
     })
       .required("Required *"),
   });
 
-  const initialValue = {
-    email: "",
+  const initialValue: EmailAndPassword = {
+    email_address: "",
     password: "",
   }
 
-  const onSubmit = (values: any, helpers: FormikHelpers<any>) => {
+  const onSubmit = (values: EmailAndPassword, helpers: FormikHelpers<EmailAndPassword>) => {
+    save(values);
     navigation.push("SignupMore")
   }
 
@@ -64,10 +69,13 @@ function SignupScreen({navigation}: IProps) {
               <View style={{gap: 20, marginTop: 40}}>
                 <Input
                   placeholder="Email address"
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  value={values.email}
-                  error={touched.email && errors.email ? errors.email : ""}
+                  keyboardType="email-address"
+                  inputMode="email"
+                  autoCapitalize="none"
+                  onChangeText={handleChange("email_address")}
+                  onBlur={handleBlur("email_address")}
+                  value={values.email_address}
+                  error={touched.email_address && errors.email_address ? errors.email_address : ""}
                 />
                 <Input
                   placeholder="Password"
