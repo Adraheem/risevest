@@ -20,6 +20,7 @@ import {CompositeNavigationProp} from "@react-navigation/native";
 import {RootStackParamList, TabParamList} from "@/types/navigation";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {StackNavigationProp} from "@react-navigation/stack";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
   navigation: CompositeNavigationProp<BottomTabNavigationProp<TabParamList, "Plans">, StackNavigationProp<RootStackParamList>>
@@ -31,7 +32,7 @@ function PlansScreen({navigation}: IProps) {
   const {data, isLoading, isError, refetch, isRefetching} = useQuery("plans", planService.getPlans);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+    <SafeAreaView style={[{flex: 1, backgroundColor: palette.white}, androidSafeArea]}>
       <View style={styles.container}>
         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
           <Text title style={{fontSize: fontSize.xl, fontWeight: "700"}}>Plans</Text>

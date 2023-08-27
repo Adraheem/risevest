@@ -5,6 +5,7 @@ import fontSize from "@/assets/fontSize";
 import {Ionicons} from "@expo/vector-icons";
 import palette from "@/assets/palette";
 import {useNavigation} from "@react-navigation/native";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
   type?: "BACK" | "CLOSE",
@@ -20,7 +21,7 @@ function Header({type = "BACK", title}: IProps) {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={androidSafeArea}>
       <View style={[styles.container]}>
         <TouchableOpacity onPress={handleBack} activeOpacity={0.8} style={styles.back}>
           <Ionicons

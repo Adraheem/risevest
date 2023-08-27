@@ -9,6 +9,7 @@ import Plans from "@/screenComponents/home/Plans";
 import NeedHelp from "@/screenComponents/home/NeedHelp";
 import TodayQuote from "@/screenComponents/home/TodayQuote";
 import RiseIcon from "@/assets/images/RiseIcon";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
 }
@@ -17,7 +18,7 @@ function HomeScreen(props: IProps) {
   return (
     <View style={{flex: 1, backgroundColor: palette.white}}>
       <Image style={styles.bg} source={require("@/assets/images/bg-grad.png")}/>
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={[{flex: 1}, androidSafeArea]}>
         <Screen
           style={{zIndex: 2, backgroundColor: "transparent"}}
           contentContainerStyle={{backgroundColor: "transparent"}}

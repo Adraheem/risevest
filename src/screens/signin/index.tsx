@@ -13,6 +13,7 @@ import {RootStackParamList} from "@/types/navigation";
 import authService from "@/services/auth.service";
 import {EmailAndPassword} from "@/types/auth";
 import utils from "@/utils";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
   navigation: StackNavigationProp<RootStackParamList>
@@ -40,7 +41,7 @@ function SigninScreen({navigation}: IProps) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+    <SafeAreaView style={[{flex: 1, backgroundColor: palette.white}, androidSafeArea]}>
       <Screen>
         <View style={styles.container}>
           <Text title style={styles.title}>

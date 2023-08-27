@@ -13,6 +13,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {SignupParamList} from "@/types/navigation";
 import {useSignupContext} from "@/context/SignupContext";
 import {EmailAndPassword} from "@/types/auth";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
   navigation: StackNavigationProp<SignupParamList>
@@ -41,7 +42,7 @@ function SignupScreen({navigation}: IProps) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+    <SafeAreaView style={[{flex: 1, backgroundColor: palette.white}, androidSafeArea]}>
       <Screen>
         <View style={styles.container}>
           <Text title style={styles.title}>

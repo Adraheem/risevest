@@ -9,6 +9,7 @@ import {SignupParamList} from "@/types/navigation";
 import {useMutation, useQueryClient} from "react-query";
 import authService from "@/services/auth.service";
 import {RouteProp} from "@react-navigation/native";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
   route: RouteProp<SignupParamList, "SignupDone">
@@ -27,7 +28,7 @@ function SignupDoneScreen({route}: IProps) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+    <SafeAreaView style={[{flex: 1, backgroundColor: palette.white}, androidSafeArea]}>
       <View style={styles.container}>
         <View style={styles.main}>
           <Check/>

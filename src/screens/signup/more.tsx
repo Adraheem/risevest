@@ -15,6 +15,7 @@ import {MoreSignupInfo} from "@/types/auth";
 import {useSignupContext} from "@/context/SignupContext";
 import authService from "@/services/auth.service";
 import utils from "@/utils";
+import androidSafeArea from "@/utils/androidSafeArea";
 
 interface IProps {
   navigation: StackNavigationProp<SignupParamList, "SignupMore">
@@ -50,7 +51,7 @@ function SignupMoreScreen({navigation}: IProps) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+    <SafeAreaView style={[{flex: 1, backgroundColor: palette.white}, androidSafeArea]}>
       <Screen>
         <View style={styles.container}>
           <Text title style={styles.title}>
