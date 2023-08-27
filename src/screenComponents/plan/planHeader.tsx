@@ -1,17 +1,25 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, SafeAreaView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Feather, Ionicons} from "@expo/vector-icons";
 import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import {ImageBackground} from "expo-image";
 import fontSize from "@/assets/fontSize";
 import {useNavigation} from "@react-navigation/native";
+import {Plan} from "@/types/plan";
+import {useQuery} from "react-query";
+import {User} from "@/types/auth";
+import authService from "@/services/auth.service";
 
 interface IProps {
+  loading: boolean,
+  data?: Plan,
 }
 
-function PlanHeader(props: IProps) {
+function PlanHeader({loading, data}: IProps) {
   const navigation = useNavigation();
+  const {data: user} = useQuery<User>("session", authService.getSession);
+
   const handleBack = () => {
     if (navigation.canGoBack()) {
       navigation.goBack();
@@ -31,8 +39,18 @@ function PlanHeader(props: IProps) {
           </TouchableOpacity>
 
           <View style={{flex: 1}}>
-            <Text title style={styles.text}>Start a business</Text>
-            <Text style={{textAlign: "center", color: palette.white}}>for Kate Ventures</Text>
+            {loading ?
+              <ActivityIndicator color={palette.white} style={{alignItems: "center"}}/> :
+              <Text title style={styles.text}>
+                {data?.plan_name}
+              </Text>
+            }
+            <Text style={{
+              textAlign: "center",
+              color: palette.white
+            }}>
+              for {user?.first_name} {user?.last_name}
+            </Text>
           </View>
 
           <TouchableOpacity onPress={handleBack} activeOpacity={0.8} style={styles.back}>

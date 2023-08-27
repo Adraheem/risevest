@@ -8,12 +8,31 @@ import palette from "@/assets/palette";
 import Screen from "@/components/Screen";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {NewPlanParamList} from "@/types/navigation";
+import {CreatePlan} from "@/types/plan";
+import {Formik} from "formik";
+import * as yup from "yup";
+import {useNewPlanContext} from "@/context/NewPlanContext";
 
 interface IProps {
   navigation: StackNavigationProp<NewPlanParamList>
 }
 
 function PlanName({navigation}: IProps) {
+  const {save} = useNewPlanContext();
+
+  const validationSchema = yup.object().shape({
+    plan_name: yup.string().required("Required *")
+  })
+
+  const initialValues: CreatePlan = {
+    plan_name: "",
+  }
+
+  const onSubmit = (values: CreatePlan) => {
+    save(values);
+    navigation.push("PlanAmount");
+  }
+
   return (
     <View style={styles.container}>
       <Header title="Goal name"/>
@@ -22,11 +41,36 @@ function PlanName({navigation}: IProps) {
           <View style={{padding: 20}}>
             <CreatePlanProgress step={1} total={3}/>
 
-            <View style={{marginVertical: 26}}>
-              <Input placeholder="What are you saving for"/>
-            </View>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={onSubmit}
+              validationSchema={validationSchema}
+              enableReinitialize
+            >
+              {({
+                  handleChange,
+                  handleBlur,
+                  values,
+                  isValid,
+                  errors,
+                  touched,
+                  handleSubmit,
+                }) => (
+                <>
+                  <View style={{marginVertical: 26}}>
+                    <Input
+                      placeholder="What are you saving for"
+                      onChangeText={handleChange("plan_name")}
+                      onBlur={handleBlur("plan_name")}
+                      value={values.plan_name}
+                      error={touched.plan_name && errors.plan_name ? errors.plan_name : ""}
+                    />
+                  </View>
 
-            <Button text="Continue" onPress={() => navigation.push("PlanAmount")}/>
+                  <Button text="Continue" disabled={!isValid} onPress={() => handleSubmit()}/>
+                </>
+              )}
+            </Formik>
           </View>
         </Screen>
       </SafeAreaView>

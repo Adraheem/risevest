@@ -20,7 +20,7 @@ export type NewPlanParamList = {
   PlanAmount: undefined,
   PlanDate: undefined,
   PlanReview: undefined,
-  PlanDone: undefined,
+  PlanDone: { id: string },
 }
 
 export type SignupParamList = {

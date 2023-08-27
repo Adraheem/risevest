@@ -6,17 +6,20 @@ import {AntDesign} from "@expo/vector-icons";
 import fontSize from "@/assets/fontSize";
 import {ImageBackground} from "expo-image";
 import {useNavigation} from "@react-navigation/native";
+import {Plan} from "@/types/plan";
+import utils from "@/utils";
 
 interface IProps {
+  data: Plan
 }
 
 const width = Math.min(250, (Dimensions.get("screen").width * 0.5));
 
-function PlanCard(props: IProps) {
+function PlanCard({data}: IProps) {
   const navigation = useNavigation();
 
   const handleClick = () => {
-    navigation.navigate("Plan", {id: "ueywuwyueywuw"})
+    navigation.navigate("Plan", {id: data.id})
   }
 
   return (
@@ -27,8 +30,8 @@ function PlanCard(props: IProps) {
     >
       <ImageBackground source={require("@/assets/images/purple-2.png")} style={styles.bg}>
         <View>
-          <Text style={{color: palette.white}}>Build Wealth</Text>
-          <Text title style={{fontSize: fontSize.medium, color: palette.white}}>$188.25</Text>
+          <Text style={{color: palette.white}}>{data.plan_name}</Text>
+          <Text title style={{fontSize: fontSize.medium, color: palette.white}}>${utils.numberWithCommas(data.target_amount)}</Text>
           <Text style={{color: palette.white}}>Mixed assets</Text>
         </View>
       </ImageBackground>

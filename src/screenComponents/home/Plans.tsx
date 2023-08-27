@@ -4,11 +4,15 @@ import ListHeader from "@/components/ListHeader";
 import Text from "@/components/Text";
 import palette from "@/assets/palette";
 import PlanCard, {NewPlanCard} from "@/components/PlanCard";
+import {useQuery} from "react-query";
+import planService from "@/services/plan.service";
 
 interface IProps {
 }
 
 function Plans(props: IProps) {
+  const {isLoading, data, isError} = useQuery("plans", planService.getPlans);
+
   return (
     <View style={styles.container}>
       <ListHeader title="Create a plan" moreText="View all plans"/>
@@ -18,9 +22,9 @@ function Plans(props: IProps) {
 
       <FlatList
         horizontal
-        data={[...Array(2)]}
-        renderItem={() => <PlanCard/>}
-        keyExtractor={(_, index) => index.toString()}
+        data={data?.items}
+        renderItem={({item}) => <PlanCard data={item}/>}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={{gap: 12}}
         style={{marginTop: 20}}
         ListHeaderComponent={<NewPlanCard/>}

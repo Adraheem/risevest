@@ -5,3 +5,8 @@ export interface IOnboard {
   image: string,
   bg: string,
 }
+
+export type PageDto<T> = {
+  item_count: number,
+  items: T[],
+}

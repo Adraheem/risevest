@@ -1,27 +1,46 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import Text from "@/components/Text";
 import palette from "@/assets/palette";
+import {useQuery} from "react-query";
+import {Plan} from "@/types/plan";
+import utils from "@/utils";
+import planService from "@/services/plan.service";
 
 interface IProps {
+  id: string
 }
 
-function PlanDetails(props: IProps) {
+function PlanDetails({id}: IProps) {
+  const {data} = useQuery<Plan>(["plan", id], () => planService.getPlan(id));
+  const {data: rate, isLoading, isError} = useQuery("rate", planService.getRate);
+
+  if (!data || isError) return null;
 
   return (
     <View style={styles.container}>
       <Item label="Total earnings" value="$12,000.09"/>
-      <Item label="Total earnings" value="$12,000.09"/>
-      <Item label="Total earnings" value="$12,000.09"/>
-      <Item label="Total earnings" value="$12,000.09"/>
-      <Item label="Total earnings" value="$12,000.09"/>
-      <Item label="Total earnings" value="$12,000.09" last/>
+      <Item label="Current earnings" value="$12,000.09"/>
+      <Item label="Deposit value" value="$12,000.09"/>
+      <Item
+        label={`Balance in Naira (${isLoading ? "..." : `*₦${utils.numberWithCommas(rate?.buy_rate)}`})`}
+        value={isLoading ? "..." : `*₦${utils.numberWithCommas(((rate?.buy_rate ?? 0) * data.target_amount).toFixed(2))}`}
+      />
+      <Item
+        label="Plan created on"
+        value={utils.formatDate(new Date(data.created_at), "do MMMM, yyyy")}
+      />
+      <Item
+        label="Maturity date"
+        value={utils.formatDate(new Date(data.maturity_date), "do MMMM, yyyy")}
+        last
+      />
     </View>
   );
 }
 
 interface ItemProps {
-  label: string;
+  label: React.ReactNode;
   value: string;
   last?: boolean;
 }

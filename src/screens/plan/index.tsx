@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ActivityIndicator, RefreshControl, StyleSheet, View} from 'react-native';
 import palette from "@/assets/palette";
 import PlanHeader from "@/screenComponents/plan/planHeader";
 import Screen from "@/components/Screen";
@@ -10,35 +10,57 @@ import PlanProgress from "@/screenComponents/plan/planProgress";
 import PlanDetails from "@/screenComponents/plan/planDetails";
 import RecentTransactions from "@/screenComponents/plan/recentTransactions";
 import PlanChart from "@/screenComponents/plan/planChart";
+import {RouteProp} from "@react-navigation/native";
+import {RootStackParamList} from "@/types/navigation";
+import {useQuery} from "react-query";
+import planService from "@/services/plan.service";
 
 interface IProps {
+  route: RouteProp<RootStackParamList, "Plan">
 }
 
-function IndividualPlan(props: IProps) {
-
+function IndividualPlan({route}: IProps) {
+  const {
+    isLoading,
+    isRefetching,
+    data,
+    isError,
+    refetch,
+  } = useQuery(["plan", route.params.id], () => planService.getPlan(route.params.id))
 
   return (
     <View style={styles.container}>
-      <PlanHeader/>
-      <Screen showsVerticalScrollIndicator={false}>
-        <View style={{paddingHorizontal: 20, paddingVertical: 26}}>
-          <PlanBalance/>
+      <PlanHeader loading={isLoading} data={data}/>
+      {
+        isLoading ? (
+          <View style={{marginTop: 120, alignItems: "center"}}>
+            <ActivityIndicator color={palette.brand} size="large"/>
+          </View>
+        ) : data ? (
+          <Screen
+            showsVerticalScrollIndicator={false}
+            refreshControl={<RefreshControl refreshing={isRefetching} onRefresh={refetch}/>}
+          >
+            <View style={{paddingHorizontal: 20, paddingVertical: 26}}>
+              <PlanBalance id={data.id}/>
 
-          <PlanProgress/>
+              <PlanProgress id={data.id}/>
 
-          <Button
-            text="Fund plan"
-            variant="PRIMARY-ALT"
-            iconBefore={<Entypo name="plus" size={24} color={palette.brand}/>}
-          />
+              <Button
+                text="Fund plan"
+                variant="PRIMARY-ALT"
+                iconBefore={<Entypo name="plus" size={24} color={palette.brand}/>}
+              />
 
-          <PlanChart/>
+              <PlanChart id={data.id}/>
 
-          <PlanDetails/>
+              <PlanDetails id={data.id}/>
 
-          <RecentTransactions/>
-        </View>
-      </Screen>
+              <RecentTransactions id={data.id}/>
+            </View>
+          </Screen>
+        ) : null
+      }
     </View>
   );
 }

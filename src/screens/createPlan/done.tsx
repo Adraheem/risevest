@@ -5,15 +5,20 @@ import Text from "@/components/Text";
 import Button from "@/components/Button";
 import fontSize from "@/assets/fontSize";
 import palette from "@/assets/palette";
-import {CompositeNavigationProp} from "@react-navigation/native";
+import {CompositeNavigationProp, RouteProp} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {NewPlanParamList, RootStackParamList} from "@/types/navigation";
+import {useQuery} from "react-query";
+import {User} from "@/types/auth";
 
 interface IProps {
-  navigation: CompositeNavigationProp<StackNavigationProp<NewPlanParamList>, StackNavigationProp<RootStackParamList>>
+  navigation: CompositeNavigationProp<StackNavigationProp<NewPlanParamList, "PlanDone">, StackNavigationProp<RootStackParamList>>
+  route: RouteProp<NewPlanParamList, "PlanDone">
 }
 
-function Done({navigation}: IProps) {
+function Done({navigation, route}: IProps) {
+  const {data} = useQuery<User>("session");
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -21,10 +26,10 @@ function Done({navigation}: IProps) {
           <Check/>
           <Text title style={styles.title}>You just created your plan.</Text>
           <Text style={styles.text}>
-            Well done, Deborah
+            Well done, {data?.first_name}
           </Text>
         </View>
-        <Button text="View plan" onPress={() => navigation.replace("Plan", {id: "hiwiwuiueow"})}/>
+        <Button text="View plan" onPress={() => navigation.replace("Plan", {id: route.params.id})}/>
       </View>
     </SafeAreaView>
   );

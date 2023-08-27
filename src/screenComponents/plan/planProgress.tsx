@@ -5,9 +5,10 @@ import palette from "@/assets/palette";
 import ProgressBar from "@/components/ProgressBar";
 
 interface IProps {
+  id: string;
 }
 
-function PlanProgress(props: IProps) {
+function PlanProgress({id}: IProps) {
   return (
     <View style={{marginVertical: 24}}>
       <View

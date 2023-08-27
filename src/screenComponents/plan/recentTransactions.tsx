@@ -4,6 +4,7 @@ import ListHeader from "@/components/ListHeader";
 import Transaction from "@/components/Transaction";
 
 interface IProps {
+  id: string
 }
 
 function RecentTransactions(props: IProps) {

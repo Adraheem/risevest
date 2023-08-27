@@ -1,14 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import palette from "@/assets/palette";
 import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
 import ChartDurationSelector from "@/screenComponents/plan/chartDurationSelector";
+import {useQuery} from "react-query";
+import {Plan} from "@/types/plan";
+import utils from "@/utils";
+import planService from "@/services/plan.service";
 
 interface IProps {
+  id: string
 }
 
-function PlanChart(props: IProps) {
+function PlanChart({id}: IProps) {
+  const {data} = useQuery<Plan>(["plan", id], () => planService.getPlan(id));
+
   return (
     <View style={styles.container}>
       <View style={{alignItems: "center", gap: 4}}>
@@ -17,8 +24,9 @@ function PlanChart(props: IProps) {
           fontWeight: "700",
           fontSize: fontSize.xl,
           color: palette.white
-        }}>$10,930.75</Text>
-        <Text style={{color: palette.white}}>July 26th, 2021</Text>
+        }}>${utils.numberWithCommas(data?.target_amount.toFixed(2))}</Text>
+        <Text
+          style={{color: palette.white}}>{data && utils.formatDate(new Date(data.maturity_date))}</Text>
 
         <View style={{
           flexDirection: "row",
