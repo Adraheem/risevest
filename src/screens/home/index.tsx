@@ -17,12 +17,12 @@ function HomeScreen(props: IProps) {
   return (
     <View style={{flex: 1, backgroundColor: palette.white}}>
       <Image style={styles.bg} source={require("@/assets/images/bg-grad.png")}/>
-      <Screen
-        style={{zIndex: 2, backgroundColor: "transparent"}}
-        contentContainerStyle={{backgroundColor: "transparent"}}
-        showsVerticalScrollIndicator={false}
-      >
-        <SafeAreaView>
+      <SafeAreaView style={{flex: 1}}>
+        <Screen
+          style={{zIndex: 2, backgroundColor: "transparent"}}
+          contentContainerStyle={{backgroundColor: "transparent"}}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.container}>
             <Greetings/>
             <Balance/>
@@ -33,8 +33,8 @@ function HomeScreen(props: IProps) {
               <RiseIcon/>
             </View>
           </View>
-        </SafeAreaView>
-      </Screen>
+        </Screen>
+      </SafeAreaView>
     </View>
   );
 }

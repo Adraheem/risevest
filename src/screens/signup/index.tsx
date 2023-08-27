@@ -41,9 +41,9 @@ function SignupScreen({navigation}: IProps) {
   }
 
   return (
-    <Screen>
-      <View style={styles.container}>
-        <SafeAreaView>
+    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+      <Screen>
+        <View style={styles.container}>
           <Text title style={styles.title}>
             Create Account
           </Text>
@@ -98,9 +98,9 @@ function SignupScreen({navigation}: IProps) {
               </View>
             )}
           </Formik>
-        </SafeAreaView>
-      </View>
-    </Screen>
+        </View>
+      </Screen>
+    </SafeAreaView>
   );
 }
 

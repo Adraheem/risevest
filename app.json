@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "risevest-test",
+    "name": "Raheem Rise",
     "slug": "risevest-test",
     "scheme": "risevest-raheem",
     "version": "1.0.0",
@@ -9,8 +9,8 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#0898A0"
     },
     "assetBundlePatterns": [
       "**/*"

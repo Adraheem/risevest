@@ -11,11 +11,12 @@ import utils from "@/utils";
 
 interface IProps {
   data: Plan
+  width?: number,
 }
 
-const width = Math.min(250, (Dimensions.get("screen").width * 0.5));
+const screenWidth = Math.min(250, (Dimensions.get("screen").width * 0.5));
 
-function PlanCard({data}: IProps) {
+function PlanCard({data, width = screenWidth}: IProps) {
   const navigation = useNavigation();
 
   const handleClick = () => {
@@ -26,12 +27,15 @@ function PlanCard({data}: IProps) {
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={handleClick}
-      style={styles.container}
+      style={[styles.container, {width}]}
     >
       <ImageBackground source={require("@/assets/images/purple-2.png")} style={styles.bg}>
         <View>
           <Text style={{color: palette.white}}>{data.plan_name}</Text>
-          <Text title style={{fontSize: fontSize.medium, color: palette.white}}>${utils.numberWithCommas(data.target_amount)}</Text>
+          <Text title style={{
+            fontSize: fontSize.medium,
+            color: palette.white
+          }}>${utils.numberWithCommas(data.target_amount)}</Text>
           <Text style={{color: palette.white}}>Mixed assets</Text>
         </View>
       </ImageBackground>
@@ -61,8 +65,8 @@ export function NewPlanCard() {
 
 const styles = StyleSheet.create({
   container: {
-    width: width,
-    height: width * 4 / 3,
+    width: screenWidth,
+    aspectRatio: 3 / 4,
     borderRadius: 15,
     backgroundColor: palette.offBlack,
     overflow: "hidden",

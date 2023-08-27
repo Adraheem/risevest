@@ -50,9 +50,9 @@ function SignupMoreScreen({navigation}: IProps) {
   }
 
   return (
-    <Screen>
-      <View style={styles.container}>
-        <SafeAreaView>
+    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+      <Screen>
+        <View style={styles.container}>
           <Text title style={styles.title}>
             Tell Us More About You
           </Text>
@@ -130,9 +130,9 @@ function SignupMoreScreen({navigation}: IProps) {
               </View>
             )}
           </Formik>
-        </SafeAreaView>
-      </View>
-    </Screen>
+        </View>
+      </Screen>
+    </SafeAreaView>
   );
 }
 

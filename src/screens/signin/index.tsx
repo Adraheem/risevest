@@ -40,9 +40,9 @@ function SigninScreen({navigation}: IProps) {
   }
 
   return (
-    <Screen>
-      <View style={styles.container}>
-        <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
+      <Screen>
+        <View style={styles.container}>
           <Text title style={styles.title}>
             Welcome back
           </Text>
@@ -108,9 +108,9 @@ function SigninScreen({navigation}: IProps) {
               up</Text>
             </Text>
           </TouchableOpacity>
-        </SafeAreaView>
-      </View>
-    </Screen>
+        </View>
+      </Screen>
+    </SafeAreaView>
   );
 }
 
