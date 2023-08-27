@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Text from "@/components/Text";
 import fontSize from "@/assets/fontSize";
@@ -6,6 +6,7 @@ import palette from "@/assets/palette";
 import {Ionicons} from "@expo/vector-icons";
 import {useQuery} from "react-query";
 import authService from "@/services/auth.service";
+import utils from "@/utils";
 
 interface IProps {
 }
@@ -13,10 +14,12 @@ interface IProps {
 function Greetings(props: IProps) {
   const {data} = useQuery("session", authService.getSession);
 
+  const greet = useMemo(() => utils.greet(), []);
+
   return (
     <View style={{flexDirection: "row", alignItems: "center"}}>
       <View style={{flex: 1}}>
-        <Text>Good morning ☀️</Text>
+        <Text>{greet}</Text>
         <Text style={{fontSize: fontSize.large}}>{data?.first_name}</Text>
       </View>
       <View style={{

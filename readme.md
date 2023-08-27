@@ -19,6 +19,14 @@ This is a React Native mobile application developed as part of a React Native De
 - Yup
 - Redux Toolkit
 
+## Relevant Links
+- [Android build (APK)](https://drive.google.com/file/d/1wW4GDM6xjXObn8y626Z8qQPGClddZfeI/view?usp=sharing)
+- [GitHub Repo](https://github.com/Adraheem/risevest)
+- [Explainer Video](https://youtu.be/zJEeJRfb_jU?si=TSZ8e3i0RAqgFGmc)
+
+[![Explainer Video](https://img.youtube.com/vi/zJEeJRfb_jU/0.jpg)](https://www.youtube.com/watch?v=zJEeJRfb_jU)
+
+
 ## Concerns
 Although, the assessment was awesome and interesting, but it came with some challenges such as:
 - Figma Design: The design is intuitive and welcoming, more importantly is the user flow which was not indicated correctly/completely in the design leaving some screens unreachable.

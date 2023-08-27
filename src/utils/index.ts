@@ -1,4 +1,4 @@
-import {format} from "date-fns";
+import {format, getHours} from "date-fns";
 import {FormikHelpers} from "formik";
 import {Alert} from "react-native";
 import isEmpty from "is-empty";
@@ -30,6 +30,18 @@ class Utils {
       return f + "." + xArray[1];
     } else {
       return f;
+    }
+  }
+
+  public greet() {
+    const hrs = getHours(Date.now());
+
+    if (0 <= hrs && hrs < 12) {
+      return "Good morning 🌅";
+    } else if (12 <= hrs && hrs < 16) {
+      return "Good afternoon ☀️";
+    } else {
+      return "Good evening 🌘";
     }
   }
 }
