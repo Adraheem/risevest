@@ -11,6 +11,7 @@ import FeedIcon from "@/assets/images/FeedIcon";
 import {BlurView} from "expo-blur";
 import BottomTabBarItem from "@/components/BottomTabBar/BottomTabBarItem";
 import {BottomTabBarOptions} from "@react-navigation/bottom-tabs";
+import {ImageBackground} from "expo-image";
 
 interface IProps extends BottomTabBarProps<BottomTabBarOptions> {
 }
@@ -58,7 +59,7 @@ function BottomTabBar(props: IProps) {
           active={props.state.index}
           name="Account"
           path="Account"
-          icon={HomeIcon}
+          icon={ProfileIcon}
           id={props.state.routeNames.findIndex(r => r === "Account")}
         />
       </View>
@@ -66,10 +67,16 @@ function BottomTabBar(props: IProps) {
   );
 }
 
+const ProfileIcon = () => {
+  return <ImageBackground source={require("@/assets/images/orange.png")} contentFit="cover"
+                          contentPosition="center" style={styles.profile}/>
+}
+
 const styles = StyleSheet.create({
   container: {
     borderTopWidth: 1,
     borderColor: palette.offWhite,
+    backgroundColor: palette.white,
   },
   wrapper: {
     flexDirection: "row",
@@ -84,6 +91,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: fontSize.caption,
     marginTop: 4
+  },
+  profile: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    overflow: "hidden",
   }
 });
 

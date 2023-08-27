@@ -38,6 +38,11 @@ class AuthService {
     })
   }
 
+  public logout() {
+    setAuthToken();
+    store.dispatch(authActions.logout());
+  }
+
 }
 
 const authService = new AuthService();

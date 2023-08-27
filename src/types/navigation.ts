@@ -12,6 +12,9 @@ export type RootStackParamList = {
 export type TabParamList = {
   Home: undefined,
   Plans: undefined,
+  Wallet: undefined,
+  Feed: undefined,
+  Account: undefined,
 }
 
 export type NewPlanParamList = {
