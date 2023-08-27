@@ -3,7 +3,7 @@
     "name": "Raheem Rise",
     "slug": "risevest-test",
     "scheme": "risevest-raheem",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/images/icon.png",
     "userInterfaceStyle": "automatic",
@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#0898A0"
       },
       "package": "com.adraheem.risevesttest"
     },
