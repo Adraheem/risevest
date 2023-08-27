@@ -28,6 +28,7 @@ function Review({navigation}: IProps) {
   const {isLoading: saving, mutate} = useMutation(planService.createPlan, {
     onSuccess(plan) {
       queryClient.invalidateQueries(["plan", plan.id]);
+      queryClient.invalidateQueries("plans");
       navigation.push("PlanDone", {id: plan.id});
     }
   });

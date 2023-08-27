@@ -9,8 +9,10 @@ class Utils {
   }
 
   public handleRequestError(err: any, helpers?: FormikHelpers<any>) {
+    console.log(err);
     helpers && helpers.setSubmitting(false);
     if (err?.response?.data?.data && helpers) {
+      console.log("err: ", err.response.data)
       helpers.setErrors(err.response.data.data);
     } else if (err?.response?.data?.message) {
       Alert.alert("Error", err.response.data.message);

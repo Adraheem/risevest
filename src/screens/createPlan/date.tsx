@@ -11,7 +11,7 @@ import {NewPlanParamList} from "@/types/navigation";
 import {useNewPlanContext} from "@/context/NewPlanContext";
 import * as yup from "yup";
 import {CreatePlan} from "@/types/plan";
-import {addDays} from "date-fns";
+import {addMonths, addYears} from "date-fns";
 import {Formik} from "formik";
 
 interface IProps {
@@ -23,7 +23,7 @@ function PlanDate({navigation}: IProps) {
 
   const validationSchema = yup.object().shape({
     maturity_date: yup.date()
-      .min(addDays(new Date(), 30), "Maturity date is at least 30 days")
+      .min(addYears(addMonths(new Date(), 1), 1), "Maturity date is at least 30 days")
       .required("Required *")
   })
 
@@ -61,7 +61,7 @@ function PlanDate({navigation}: IProps) {
                   <View style={{marginVertical: 26}}>
                     <DatePicker
                       placeholder="When do you want to withdraw?"
-                      minimumDate={addDays(new Date(), 30)}
+                      minimumDate={addYears(addMonths(new Date(), 1), 1)}
                       onChange={handleChange("maturity_date")}
                       onBlur={handleBlur("maturity_date")}
                       value={values.maturity_date}

@@ -24,7 +24,7 @@ function SignupScreen({navigation}: IProps) {
   const validationSchema = yup.object().shape({
     email_address: yup.string().email("Invalid email format").required("Required *"),
     password: yup.string().test("strongPw", "", (value) => {
-      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/.test(value ?? "");
+      return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}$/.test(value ?? "");
     })
       .required("Required *"),
   });
@@ -37,6 +37,7 @@ function SignupScreen({navigation}: IProps) {
   const onSubmit = (values: EmailAndPassword, helpers: FormikHelpers<EmailAndPassword>) => {
     save(values);
     navigation.push("SignupMore")
+    helpers.setSubmitting(false);
   }
 
   return (
@@ -108,7 +109,7 @@ function PasswordValidation({password: pw}: { password: string }) {
   const {min, uppercase, special} = useMemo(() => {
     const min = pw.length >= 8;
     const uppercase = /[A-Z]+/.test(pw);
-    const special = /\W+/.test(pw);
+    const special = /[@$!%*?&]+/.test(pw);
 
     return {min, uppercase, special};
   }, [pw]);
@@ -137,7 +138,7 @@ function PasswordValidation({password: pw}: { password: string }) {
           size={24}
           color={palette.brand}
         />
-        <Text>One unique character (e.g: !@#$%^&*?)</Text>
+        <Text>One unique character (e.g: @$!%*?&)</Text>
       </View>
     </View>
   )

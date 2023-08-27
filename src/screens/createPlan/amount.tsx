@@ -21,7 +21,7 @@ function PlanAmount({navigation}: IProps) {
   const {save} = useNewPlanContext();
 
   const validationSchema = yup.object().shape({
-    target_amount: yup.number().min(1, "Enter valid amount").required("Required *")
+    target_amount: yup.number().min(100, "Enter valid amount").required("Required *")
   })
 
   const initialValues: CreatePlan = {}

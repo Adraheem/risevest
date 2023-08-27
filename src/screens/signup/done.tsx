@@ -27,7 +27,7 @@ function SignupDoneScreen({route}: IProps) {
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: palette.white}}>
       <View style={styles.container}>
         <View style={styles.main}>
           <Check/>

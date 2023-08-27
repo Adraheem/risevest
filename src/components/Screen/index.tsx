@@ -17,17 +17,17 @@ function Screen({children, contentContainerStyle, style, ...props}: IProps) {
       behavior={Platform.OS === "android" ? "height" : "padding"}
       style={{flex: 1}}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <ScrollView
-          keyboardShouldPersistTaps="always"
-          keyboardDismissMode="interactive"
-          contentContainerStyle={[styles.container, contentContainerStyle]}
-          style={[{backgroundColor: palette.white, flex: 1}, style]}
-          {...props}
-        >
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="interactive"
+        contentContainerStyle={[styles.container, contentContainerStyle]}
+        style={[{backgroundColor: palette.white, flex: 1}, style]}
+        {...props}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           {children}
-        </ScrollView>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }

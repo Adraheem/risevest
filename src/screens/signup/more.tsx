@@ -38,6 +38,8 @@ function SignupMoreScreen({navigation}: IProps) {
     if (data) {
       authService.signup({...data, ...values})
         .then(() => {
+          console.log("Signup completed")
+          helpers.setSubmitting(false);
           navigation.replace("SignupDone", {
             email_address: data.email_address,
             password: data.password
