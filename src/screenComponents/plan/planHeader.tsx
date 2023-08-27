@@ -10,6 +10,7 @@ import {Plan} from "@/types/plan";
 import {useQuery} from "react-query";
 import {User} from "@/types/auth";
 import authService from "@/services/auth.service";
+import {StatusBar} from "expo-status-bar";
 
 interface IProps {
   loading: boolean,
@@ -28,6 +29,7 @@ function PlanHeader({loading, data}: IProps) {
 
   return (
     <ImageBackground source={require("@/assets/images/gift.jpg")} blurRadius={30}>
+      <StatusBar style="light"/>
       <SafeAreaView>
         <View style={[styles.headerContainer]}>
           <TouchableOpacity onPress={handleBack} activeOpacity={0.8} style={styles.back}>
