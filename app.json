@@ -37,6 +37,12 @@
         "projectId": "8b803942-c850-49b6-b47f-14ea1e5c5ffe"
       }
     },
-    "owner": "adraheem"
+    "owner": "adraheem",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8b803942-c850-49b6-b47f-14ea1e5c5ffe"
+    }
   }
 }
